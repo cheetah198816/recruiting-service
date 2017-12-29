@@ -22,7 +22,7 @@ public class OffersCommandServiceImpl implements OffersCommandService {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public BaseOfferEvent sendOfferEvent(BaseOfferEvent baseOfferEvent) {
-        RawOfferEventEntity rawOfferEventEntity = OfferEventStoreMapper.event2entity(baseOfferEvent);
+        final RawOfferEventEntity rawOfferEventEntity = OfferEventStoreMapper.event2entity(baseOfferEvent);
         offerEventStoreRepository.save(rawOfferEventEntity);
 
         return baseOfferEvent;

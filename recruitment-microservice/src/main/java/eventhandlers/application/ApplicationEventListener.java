@@ -32,13 +32,13 @@ public class ApplicationEventListener {
     @EventListener
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void onApplicationApplied(ApplicationAppliedEvent applicationAppliedEvent) {
-        Optional<OfferEntity> optionalOfferEntity = offerRepository.findByOfferUuid(applicationAppliedEvent.getOfferUuid());
+        final Optional<OfferEntity> optionalOfferEntity = offerRepository.findByOfferUuid(applicationAppliedEvent.getOfferUuid());
         if (optionalOfferEntity.isPresent()) {
-            OfferEntity offerEntity = optionalOfferEntity.get();
-            Integer noOfApplications = offerEntity.getNoOfApplications() + 1;
+            final OfferEntity offerEntity = optionalOfferEntity.get();
+            final Integer noOfApplications = offerEntity.getNoOfApplications() + 1;
             offerEntity.setNoOfApplications(noOfApplications);
-            OfferEntity savedOfferEntity = offerRepository.save(offerEntity);
-            ApplicationEntity applicationEntity = new ApplicationEntity();
+            final OfferEntity savedOfferEntity = offerRepository.save(offerEntity);
+            final ApplicationEntity applicationEntity = new ApplicationEntity();
             applicationEntity.setResume(applicationAppliedEvent.getResume());
             applicationEntity.setApplicationUuid(applicationAppliedEvent.getApplicationUuid());
             applicationEntity.setEmailId(applicationAppliedEvent.getEmailId());
@@ -52,18 +52,18 @@ public class ApplicationEventListener {
     @EventListener
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void onApplicationInvited(ApplicationInvitedEvent applicationInvitedEvent) {
-        String message = "You are invited for the interview ";
+        final String message = "You are invited for the interview ";
         updateApplicationStatusAndSendNotification(applicationInvitedEvent, message);
     }
 
     @Transactional(readOnly = true)
     private void updateApplicationStatusAndSendNotification(BaseApplicationEvent applicationInvitedEvent, String message) {
-        Optional<OfferEntity> offerEntityOptional = offerRepository.findByOfferUuid(applicationInvitedEvent.getOfferUuid());
+        final Optional<OfferEntity> offerEntityOptional = offerRepository.findByOfferUuid(applicationInvitedEvent.getOfferUuid());
         if (offerEntityOptional.isPresent()) {
-            OfferEntity offerEntity = offerEntityOptional.get();
-            Optional<ApplicationEntity> applicationEntityOptional = applicationRepository.findByApplicationUuidAndOffer(applicationInvitedEvent.getApplicationUuid(), offerEntity);
+            final OfferEntity offerEntity = offerEntityOptional.get();
+            final Optional<ApplicationEntity> applicationEntityOptional = applicationRepository.findByApplicationUuidAndOffer(applicationInvitedEvent.getApplicationUuid(), offerEntity);
             if (applicationEntityOptional.isPresent()) {
-                ApplicationEntity applicationEntity = applicationEntityOptional.get();
+                final ApplicationEntity applicationEntity = applicationEntityOptional.get();
                 applicationEntity.setCurrentApplicationStatus(applicationInvitedEvent.getApplicationStatus());
                 applicationRepository.save(applicationEntity);
                 logger.info(message + ": application Id " + applicationEntity.getId());
@@ -74,14 +74,14 @@ public class ApplicationEventListener {
     @EventListener
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void onApplicationHired(ApplicationHiredEvent applicationHiredEvent) {
-        String message = "You are hired.Congratulations!!! ";
+        final String message = "You are hired.Congratulations!!! ";
         updateApplicationStatusAndSendNotification(applicationHiredEvent, message);
     }
 
     @EventListener
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void onApplicationRejected(ApplicationRejectedEvent applicationRejectedEvent) {
-        String message = "Sorry!!You are rejected this time. ";
+        final String message = "Sorry!!You are rejected this time. ";
         updateApplicationStatusAndSendNotification(applicationRejectedEvent, message);
     }
 }

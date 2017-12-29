@@ -22,7 +22,7 @@ public class ApplicationCommandServiceImpl implements ApplicationCommandService 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public BaseApplicationEvent sendApplicationStatusEvent(BaseApplicationEvent baseApplicationEvent) {
-        RawApplicationEventEntity rawApplicationEventEntity = ApplicationEventStoreMapper.event2entity(baseApplicationEvent);
+        final RawApplicationEventEntity rawApplicationEventEntity = ApplicationEventStoreMapper.event2entity(baseApplicationEvent);
         applicationEventStoreRepository.save(rawApplicationEventEntity);
 
         return baseApplicationEvent;

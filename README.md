@@ -9,6 +9,8 @@ This microservice is divided into 3 parts :
 3. **Event Handler** : 
 	1. Event Handlers of offer  and application listen to the events from the event store at a 	fixed rate of 1000 ms and write to the database.
 
+**Notice** : **The event store and the database are contained in the same node**.
+
 The microservice contains one main module: 
 
 1. **recruitment-microservice** - 

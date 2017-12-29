@@ -9,7 +9,7 @@ import offer.OfferDto;
 public class OfferMapper {
 
     public static OfferDto entity2Dto(OfferEntity offerEntity) {
-        OfferDto offerDto = new OfferDto();
+        final OfferDto offerDto = new OfferDto();
         offerDto.setId(offerEntity.getId());
         offerDto.setJobTitle(offerEntity.getJobTitle());
         offerDto.setNoOfApplications(offerEntity.getNoOfApplications());
