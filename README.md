@@ -9,11 +9,29 @@ This microservice is divided into 3 parts :
 3. **Event Handler** : 
 	1. Event Handlers of offer  and application listen to the events from the event store at a 	fixed rate of 1000 ms and write to the database.
 
-The microservice contains one main module : 
+The microservice contains one main module: 
 
 1. **recruitment-microservice** - 
 	1. It runs on port of 8080.
 	2. The main class to start the module is RecruitmentApplication.java.
+
+The other two modules :
+ 
+ **recruitment-api** : stores the dtos and events.
+ 
+ **recruitment-model** : stores the entities.
+
+**Event Types** :
+
+1. **CreatedOfferEvent** : When a job offer is created. This event is fired and a notification is sent.
+
+2. **ApplicationAppliedEvent** : When a user applies to a job offer. This event is fired and a notification is sent .
+
+3. **ApplicationInvitedEvent** : When a user is invited for an interview. This event is fired and a notification is sent.
+
+4. **ApplicationHiredEvent** : When a user is hired. This event is fired and a notification is sent.
+
+5. **ApplicationRejectedEvent** : When a user is rejected. This event is fired and a notification is sent.
 
 **Basic Authentication** :
 
