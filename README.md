@@ -15,6 +15,14 @@ The microservice contains one main module :
 	1. It runs on port of 8080.
 	2. The main class to start the module is RecruitmentApplication.java.
 
+**Basic Authentication** :
+
+Basic Authentication is supported. The credentials are 
+
+**Username** : user
+
+**Password** : abcd1234
+
 **Database** :
 
 The database used is In Memory Database(H2). 
