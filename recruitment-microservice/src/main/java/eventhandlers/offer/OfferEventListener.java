@@ -5,6 +5,8 @@ import model.OfferEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import repositories.offer.OfferRepository;
 
 import java.util.logging.Level;
@@ -22,6 +24,7 @@ public class OfferEventListener {
     private OfferRepository offerRepository;
 
     @EventListener
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void onCreateOffer(CreatedOfferEvent createdOfferEvent) {
         try {
             final OfferEntity offerEntity = new OfferEntity();

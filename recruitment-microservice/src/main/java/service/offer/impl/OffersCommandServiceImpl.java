@@ -5,6 +5,8 @@ import mappers.eventstore.OfferEventStoreMapper;
 import model.RawOfferEventEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import repositories.eventstore.OfferEventStoreRepository;
 import service.offer.OffersCommandService;
 
@@ -18,6 +20,7 @@ public class OffersCommandServiceImpl implements OffersCommandService {
     private OfferEventStoreRepository offerEventStoreRepository;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public BaseOfferEvent sendOfferEvent(BaseOfferEvent baseOfferEvent) {
         RawOfferEventEntity rawOfferEventEntity = OfferEventStoreMapper.event2entity(baseOfferEvent);
         offerEventStoreRepository.save(rawOfferEventEntity);

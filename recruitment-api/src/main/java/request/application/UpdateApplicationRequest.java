@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import enums.ApplicationStatus;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 /**
@@ -12,6 +13,7 @@ import lombok.NonNull;
  */
 @Data
 @JsonClassDescription("Dto to update the application status")
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateApplicationRequest {
 

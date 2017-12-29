@@ -40,6 +40,7 @@ public class ApplicationRecruitmentServiceImpl implements ApplicationRecruitment
     private ApplicationCommandService applicationCommandService;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public SaveApplicationResponse saveApplication(SaveApplicationRequest saveApplicationRequest, Long offerId) {
         final SaveApplicationResponse saveApplicationResponse = new SaveApplicationResponse();
         final BaseApplicationEvent baseApplicationEvent;
@@ -84,6 +85,7 @@ public class ApplicationRecruitmentServiceImpl implements ApplicationRecruitment
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public UpdateApplicationResponse updateApplication(UpdateApplicationRequest updateApplicationRequest, Long offerId, Long applicationId) {
         final UpdateApplicationResponse updateApplicationResponse = new UpdateApplicationResponse();
         final BaseApplicationEvent baseApplicationEvent;

@@ -5,6 +5,8 @@ import mappers.eventstore.ApplicationEventStoreMapper;
 import model.RawApplicationEventEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import repositories.eventstore.ApplicationEventStoreRepository;
 import service.application.ApplicationCommandService;
 
@@ -18,6 +20,7 @@ public class ApplicationCommandServiceImpl implements ApplicationCommandService 
     private ApplicationEventStoreRepository applicationEventStoreRepository;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public BaseApplicationEvent sendApplicationStatusEvent(BaseApplicationEvent baseApplicationEvent) {
         RawApplicationEventEntity rawApplicationEventEntity = ApplicationEventStoreMapper.event2entity(baseApplicationEvent);
         applicationEventStoreRepository.save(rawApplicationEventEntity);

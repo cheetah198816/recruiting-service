@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonClassDescription;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 /**
@@ -11,6 +12,7 @@ import lombok.NonNull;
  */
 @Data
 @JsonClassDescription("Request Dto for saving the application.")
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SaveApplicationRequest {
 

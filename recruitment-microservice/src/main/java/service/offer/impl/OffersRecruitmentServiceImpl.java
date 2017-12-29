@@ -60,6 +60,7 @@ public class OffersRecruitmentServiceImpl implements OffersRecruitmentService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public FetchOffersResponse fetchAllOffers() {
         final FetchOffersResponse fetchOffersResponse = new FetchOffersResponse();
         final List<OfferDto> offerDtoList = offersQueryService.findAllOffers();
@@ -69,6 +70,7 @@ public class OffersRecruitmentServiceImpl implements OffersRecruitmentService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public FetchOfferByIdResponse fetchOfferById(Long offerId) {
         final FetchOfferByIdResponse fetchOfferByIdResponse = new FetchOfferByIdResponse();
         final OfferEntity offerEntity = offersQueryService.findById(offerId);
@@ -79,6 +81,7 @@ public class OffersRecruitmentServiceImpl implements OffersRecruitmentService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public TrackApplicationResponse fetchNumberOfApplications(Long offerId) {
         final TrackApplicationResponse trackApplicationResponse = new TrackApplicationResponse();
         final Integer numberOfApplications = offersQueryService.fetchNumberOfApplications(offerId);

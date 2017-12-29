@@ -44,12 +44,14 @@ public class ApplicationQueryServiceImpl implements ApplicationQueryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<ApplicationEntity> fetchApplicationByEmailId(Long offerId, String emailId) {
         final OfferEntity offerEntity = offersQueryService.findById(offerId);
         return applicationRepository.findByEmailIdAndOffer(emailId, offerEntity);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UUID fetchOfferUuid(Long offerId) {
         final OfferEntity offerEntity = offersQueryService.findById(offerId);
         return offerEntity.getOfferUuid();

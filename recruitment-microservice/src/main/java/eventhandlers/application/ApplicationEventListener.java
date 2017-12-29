@@ -56,6 +56,7 @@ public class ApplicationEventListener {
         updateApplicationStatusAndSendNotification(applicationInvitedEvent, message);
     }
 
+    @Transactional(readOnly = true)
     private void updateApplicationStatusAndSendNotification(BaseApplicationEvent applicationInvitedEvent, String message) {
         Optional<OfferEntity> offerEntityOptional = offerRepository.findByOfferUuid(applicationInvitedEvent.getOfferUuid());
         if (offerEntityOptional.isPresent()) {

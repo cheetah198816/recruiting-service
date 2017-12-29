@@ -30,11 +30,13 @@ public class OffersQueryServiceImpl implements OffersQueryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<OfferEntity> findByJobTitle(String jobTitle) {
         return offerRepository.findByJobTitle(jobTitle);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Integer fetchNumberOfApplications(Long offerId) {
         final OfferEntity offerEntity = findById(offerId);
         return offerEntity.getNoOfApplications();

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import repositories.eventstore.ApplicationEventStoreRepository;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +31,7 @@ public class ApplicationEventPoller {
     private ApplicationEventPublisher eventPublisher;
 
     @Scheduled(fixedRate = 1000)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     void readNewOfferEvents() {
         applicationEventStoreRepository.findAll().stream().filter(ev -> (ev.getId() > lastProcessedId)).forEach(e -> processEvent(e));
     }
